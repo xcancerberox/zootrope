@@ -1,0 +1,270 @@
+EESchema Schematic File Version 2  date Sat 05 Jul 2014 10:23:40 AM ART
+LIBS:power
+LIBS:atmel
+LIBS:device
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:special
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:contrib
+LIBS:valves
+LIBS:L298
+LIBS:zootrope-cache
+EELAYER 25  0
+EELAYER END
+$Descr A4 11700 8267
+encoding utf-8
+Sheet 2 2
+Title "KISS - Puente H"
+Date "5 jul 2014"
+Rev "1.0"
+Comp "Club de Robótica - FIUBA"
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L +12V #PWR?
+U 1 1 53B72974
+P 4550 2800
+F 0 "#PWR?" H 4550 2750 20  0001 C CNN
+F 1 "+12V" H 4550 2900 30  0000 C CNN
+	1    4550 2800
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 53B72956
+P 5850 4550
+F 0 "#PWR?" H 5850 4550 30  0001 C CNN
+F 1 "GND" H 5850 4480 30  0001 C CNN
+	1    5850 4550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8750 4900 8750 2800
+Wire Wire Line
+	6700 3600 8350 3600
+Wire Wire Line
+	6700 4000 8350 4000
+Connection ~ 8750 3400
+Connection ~ 8750 4900
+Wire Wire Line
+	8350 2600 6700 2600
+Wire Wire Line
+	7950 4950 7950 4900
+Wire Wire Line
+	8350 5200 7550 5200
+Wire Wire Line
+	8350 5200 8350 4900
+Wire Wire Line
+	7950 2850 7950 2800
+Wire Wire Line
+	8350 2600 8350 2800
+Wire Wire Line
+	8350 3600 8350 3400
+Wire Wire Line
+	7950 3450 7950 3400
+Wire Wire Line
+	8350 4000 8350 4300
+Wire Wire Line
+	7950 4350 7950 4300
+Connection ~ 7450 6300
+Connection ~ 8750 4300
+Connection ~ 8350 4300
+Connection ~ 7950 4300
+Connection ~ 7950 4900
+Connection ~ 8350 4900
+Connection ~ 8750 4900
+Wire Wire Line
+	6700 4100 7550 4100
+Wire Wire Line
+	7550 4100 7550 5200
+Wire Wire Line
+	6700 2600 6700 3500
+$Comp
+L L298D U?
+U 1 1 53B727A4
+P 5850 3800
+F 0 "U?" H 5850 3800 60  0000 C CNN
+F 1 "L298D" H 5850 3900 60  0000 C CNN
+	1    5850 3800
+	1    0    0    -1  
+$EndComp
+$Comp
+L VCC #PWR021
+U 1 1 4CF7B629
+P 4400 2800
+F 0 "#PWR021" H 4400 2900 30  0001 C CNN
+F 1 "VCC" H 4400 2900 30  0000 C CNN
+	1    4400 2800
+	1    0    0    -1  
+$EndComp
+$Comp
+L +12V #PWR022
+U 1 1 4CF7B512
+P 8750 2450
+F 0 "#PWR022" H 8750 2400 20  0001 C CNN
+F 1 "+12V" H 8750 2550 30  0000 C CNN
+	1    8750 2450
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR023
+U 1 1 4B18409B
+P 7950 4350
+F 0 "#PWR023" H 7950 4350 30  0001 C CNN
+F 1 "GND" H 7950 4280 30  0001 C CNN
+	1    7950 4350
+	1    0    0    -1  
+$EndComp
+Text HLabel 4750 4000 0    60   Input ~ 0
+In3
+Text HLabel 4750 4100 0    60   Input ~ 0
+In4
+Text HLabel 4750 3700 0    60   Input ~ 0
+In1
+Text HLabel 4750 3800 0    60   Input ~ 0
+In2
+Text HLabel 4750 3900 0    60   Input ~ 0
+En1
+Text HLabel 4750 4200 0    60   Input ~ 0
+En2
+$Comp
+L GND #PWR024
+U 1 1 4AF8D7B3
+P 7950 4950
+F 0 "#PWR024" H 7950 4950 30  0001 C CNN
+F 1 "GND" H 7950 4880 30  0001 C CNN
+	1    7950 4950
+	1    0    0    -1  
+$EndComp
+$Comp
+L DIODE 6
+U 1 1 4AF8D77B
+P 8150 4900
+F 0 "6" H 8150 5000 40  0000 C CNN
+F 1 "DIODE" H 8150 4800 40  0000 C CNN
+	1    8150 4900
+	1    0    0    -1  
+$EndComp
+$Comp
+L DIODE 7
+U 1 1 4AF8D776
+P 8150 4300
+F 0 "7" H 8150 4400 40  0000 C CNN
+F 1 "DIODE" H 8150 4200 40  0000 C CNN
+	1    8150 4300
+	1    0    0    -1  
+$EndComp
+$Comp
+L DIODE 9
+U 1 1 4AF8D770
+P 8550 4300
+F 0 "9" H 8550 4400 40  0000 C CNN
+F 1 "DIODE" H 8550 4200 40  0000 C CNN
+	1    8550 4300
+	1    0    0    -1  
+$EndComp
+$Comp
+L DIODE 8
+U 1 1 4AF8D769
+P 8550 4900
+F 0 "8" H 8550 5000 40  0000 C CNN
+F 1 "DIODE" H 8550 4800 40  0000 C CNN
+	1    8550 4900
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR025
+U 1 1 4AF8D6E0
+P 7950 3450
+F 0 "#PWR025" H 7950 3450 30  0001 C CNN
+F 1 "GND" H 7950 3380 30  0001 C CNN
+	1    7950 3450
+	-1   0    0    -1  
+$EndComp
+$Comp
+L GND #PWR026
+U 1 1 4AF8D6D0
+P 7950 2850
+F 0 "#PWR026" H 7950 2850 30  0001 C CNN
+F 1 "GND" H 7950 2780 30  0001 C CNN
+	1    7950 2850
+	-1   0    0    -1  
+$EndComp
+$Comp
+L DIODE 4
+U 1 1 4AF8D6C6
+P 8150 2800
+F 0 "4" H 8150 2900 40  0000 C CNN
+F 1 "DIODE" H 8150 2700 40  0000 C CNN
+	1    8150 2800
+	1    0    0    1   
+$EndComp
+$Comp
+L DIODE 5
+U 1 1 4AF8D6AF
+P 8150 3400
+F 0 "5" H 8150 3500 40  0000 C CNN
+F 1 "DIODE" H 8150 3300 40  0000 C CNN
+	1    8150 3400
+	1    0    0    1   
+$EndComp
+$Comp
+L DIODE 3
+U 1 1 4AF8D665
+P 8550 3400
+F 0 "3" H 8550 3500 40  0000 C CNN
+F 1 "DIODE" H 8550 3300 40  0000 C CNN
+	1    8550 3400
+	1    0    0    1   
+$EndComp
+$Comp
+L DIODE 2
+U 1 1 4AF8D657
+P 8550 2800
+F 0 "2" H 8550 2900 40  0000 C CNN
+F 1 "DIODE" H 8550 2700 40  0000 C CNN
+	1    8550 2800
+	1    0    0    1   
+$EndComp
+$Comp
+L INDUCTOR MOTOR1
+U 1 1 4AF8D60E
+P 8350 3100
+F 0 "MOTOR1" V 8300 3100 40  0000 C CNN
+F 1 "INDUCTOR" V 8450 3100 40  0000 C CNN
+	1    8350 3100
+	-1   0    0    -1  
+$EndComp
+$Comp
+L INDUCTOR MOTOR2
+U 1 1 4AF8D524
+P 8350 4600
+F 0 "MOTOR2" V 8300 4600 40  0000 C CNN
+F 1 "INDUCTOR" V 8450 4600 40  0000 C CNN
+	1    8350 4600
+	-1   0    0    1   
+$EndComp
+$EndSCHEMATC
