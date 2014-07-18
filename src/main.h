@@ -17,15 +17,15 @@
 #define LED_3_PORT_NAME       C
 #define LED_3_PIN_NUM         1
 #define SENSOR_HALL_PORT_NAME B
-#define SENSOR_HALL_PIN_NUM   4
+#define SENSOR_HALL_PIN_NUM   0
 #define MOTOR_IN1_PORT_NAME   D
 #define MOTOR_IN1_PIN_NUM     2
 #define MOTOR_IN2_PORT_NAME   D
 #define MOTOR_IN2_PIN_NUM     3
 #define MOTOR_EN_PORT_NAME    B
 #define MOTOR_EN_PIN_NUM      1 //OC1A
-#define FLASH_1_PORT_NAME     C
-#define FLASH_1_PIN_NUM       1
+#define FLASH_1_PORT_NAME     D
+#define FLASH_1_PIN_NUM       4
 
 #define LED_1_PORT def_port_reg(LED_1_PORT_NAME)
 #define LED_1_PIN  def_pin_reg(LED_1_PORT_NAME)

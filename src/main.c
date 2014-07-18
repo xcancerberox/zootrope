@@ -1,4 +1,5 @@
 #include <avr/io.h>
+#include <avr/interrupt.h>
 #include <util/delay.h>
 #include "main.h"
 
@@ -7,12 +8,11 @@ uint8_t vel_ref;
 
 void setupHallEffectSensor(void){
   ClearBit(SENSOR_HALL_DDR, SENSOR_HALL_PIN_NUM);
-  ClearBit(SENSOR_HALL_PORT, SENSOR_HALL_PIN_NUM);
+  SetBit(SENSOR_HALL_PORT, SENSOR_HALL_PIN_NUM);
 
-  vel_count = 0;
   // Configuracion interrupcion externa
-
-  // Configuracion timer con interrupcion para la velocidad
+  PCICR |= (1 << PCIE0);    // set PCIE0 to enable PCMSK0 scan
+  PCMSK0 |= (1 << PCINT0);  // set PCINT0 to trigger an interrupt on state change 
 }
 
 #define PRESCALER_PWM_OFF	(0<<CS12)|(0<<CS11)|(0<<CS10)
@@ -61,7 +61,7 @@ void toggle_led_1(void){
 
 void setupFlashLeds(void){
   SetBit(FLASH_1_DDR, FLASH_1_PIN_NUM);
-  SetBit(FLASH_1_PORT, FLASH_1_PIN_NUM);
+  ClearBit(FLASH_1_PORT, FLASH_1_PIN_NUM);
 }
 
 #define AD1_PIN_NUM 4
@@ -130,45 +130,25 @@ void readAD(void){
 
 void main(void){
 
-  //setupHallEffectSensor();
+  setupHallEffectSensor();
   setupAD();
   setupFlashLeds();
   setupMotor();
   setMotorVel(70);
+  sei();
 
   for(;;){
-    flashLeds();
+    //flashLeds();
     readAD();
     setMotorVel(ad1_var*100/256);
-    _delay_ms(500);
+    _delay_ms(1000);
   }
 }
 
-/*
-ISR(INT0_vect){
-    //Debounce
+
+ISR(PCINT0_vect){
     _delay_ms(10);
-    if ((SENSOR_HALL_PORT & (1<<SENSOR_HALL_PIN_NUM)) == 0){
+    if( (PINB & (1 << PINB0)) == 0 ){
         flashLeds();
-        vel_count += 1;
     }
-}*/
-
-/*
-// vel va entre 0 y PWM_MAX (ej: 500)
-// e va entre -PWM_MAX y PWM_MAX
-// vel_count 
-
-#define K1 10
-void PID(uint8_t e, uint8_t* vel, uint8_t prev_vel){
-  *vel = prev_vel + e * (K1/100);
 }
-
-ISR(TIMER_OV){
-  int e;
-  uint8_t vel;
-  e = vel_count - vel_ref;
-  PID(e,&vel,vel_count);
-  setMotorVel(e*k1);
-}
-*/
