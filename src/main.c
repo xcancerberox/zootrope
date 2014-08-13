@@ -5,6 +5,7 @@
 
 uint8_t vel_count;
 uint8_t vel_ref;
+uint16_t contador;
 
 void setupHallEffectSensor(void){
   ClearBit(SENSOR_HALL_DDR, SENSOR_HALL_PIN_NUM);
@@ -60,7 +61,7 @@ void toggle_led_1(void){
 }
 
 void setupFlashLeds(void){
-  SetBit(FLASH_1_DDR, FLASH_1_PIN_NUM);
+  ClearBit(FLASH_1_DDR, FLASH_1_PIN_NUM);
   ClearBit(FLASH_1_PORT, FLASH_1_PIN_NUM);
 }
 
@@ -95,6 +96,27 @@ void flashLeds(void){
         _delay_ms(200);
   }
   toggle_led_1();
+  if(ad2_var < 20){
+        _delay_ms(20);
+  } else if (ad2_var < 40){
+        _delay_ms(40);
+  } else if (ad2_var < 60){
+        _delay_ms(60);
+  } else if (ad2_var < 80){
+        _delay_ms(80);
+  } else if (ad2_var < 100){
+        _delay_ms(100);
+  } else if (ad2_var < 120){
+        _delay_ms(120);
+  } else if (ad2_var < 140){
+        _delay_ms(140);
+  } else if (ad2_var < 160){
+        _delay_ms(160);
+  } else if (ad2_var < 180){
+        _delay_ms(180);
+  } else {
+        _delay_ms(200);
+  }
 }
 
 void setupDebugLeds(void){
@@ -128,27 +150,64 @@ void readAD(void){
     ad2_var = ADCH;
 }
 
-void main(void){
+void counter_setup(void){
+    contador = 0;
+    TIMSK0 = _BV(TOIE0);   // Enable Interrupt TimerCounter0 Compare Match A (SIG_OUTPUT_COMPARE0A)
+    TCCR0A = _BV(WGM01);    // Mode = CTC
+    TCCR0B = _BV(CS02) | _BV(CS00); // Clock/1024, 0.001024 seconds per tick
+}
 
-  setupHallEffectSensor();
+void delay_caca(void){
+    uint8_t delay = ad2_var + 12;
+    uint8_t i;
+    for(i=0; i < delay; i++){
+        _delay_ms(1);
+    }
+}
+
+void main(void){
+  //setupHallEffectSensor();
   setupAD();
-  setupFlashLeds();
+    setupFlashLeds();
   setupMotor();
-  setMotorVel(70);
+  setMotorVel(100);
   sei();
 
+    uint8_t delay;
+    uint8_t i;
   for(;;){
     //flashLeds();
     readAD();
-    setMotorVel(ad1_var*100/256);
-    _delay_ms(1000);
+    //setMotorVel(ad1_var*100/256);
+    delay = ad1_var;
+    for(i=0; i < delay; i++){
+        _delay_ms(1);
+    }
+    toggle_led_1();
+    delay = ad2_var;
+    for(i=0; i < delay; i++){
+        _delay_ms(1);
+    }
+    toggle_led_1();
   }
 }
 
+ISR(TIMER0_OVF_vect ){
+    contador++;
+}
 
 ISR(PCINT0_vect){
     _delay_ms(10);
+    uint8_t aux;
+    uint8_t i;
+    uint8_t j;
     if( (PINB & (1 << PINB0)) == 0 ){
-        flashLeds();
+        for(j=0; j<64; j++){
+            delay_caca();
+            toggle_led_1();
+            delay_caca();
+            toggle_led_1();
+        }
+        contador = 0;
     }
 }
